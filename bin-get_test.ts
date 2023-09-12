@@ -1,5 +1,5 @@
-import { exists } from "https://deno.land/std/fs/exists.ts";
-import { assert } from "https://deno.land/std/testing/asserts.ts";
+import { exists } from "https://deno.land/std@0.201.0/fs/exists.ts";
+import { assert } from "https://deno.land/std@0.201.0/testing/asserts.ts";
 
 const defaultAllows = new Map<string, string | null>([
   ["--allow-write", Deno.env.get("HOME") + "/bin/,/tmp"],
