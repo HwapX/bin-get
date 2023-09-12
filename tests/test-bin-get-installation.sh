@@ -14,7 +14,7 @@ sudo rm -f "$(command -v bin-get)"
 # This is the same code as in the README.md
 sudo curl -fsSL https://deno.land/install.sh | sudo DENO_INSTALL=/usr/local sh
 
-sudo deno run --allow-all https://raw.githubusercontent.com/OhMyMndy/bin-get/main/bin-get.ts install helm/helm
+sudo deno run --allow-all https://raw.githubusercontent.com/HwapX/bin-get/main/bin-get.ts install helm/helm
 
 
 sudo cp ./bin-get.ts /usr/bin/bin-get.ts
@@ -25,7 +25,7 @@ if ! command -v bin-get.ts >/dev/null; then
     exit 1
 fi
 
-sudo curl -SsL https://raw.githubusercontent.com/OhMyMndy/bin-get/main/bin-get.ts -o /usr/bin/bin-get.ts
+sudo curl -SsL https://raw.githubusercontent.com/HwapX/bin-get/main/bin-get.ts -o /usr/bin/bin-get.ts
 sudo chmod +x /usr/bin/bin-get.ts
 
 if ! command -v bin-get.ts >/dev/null; then
