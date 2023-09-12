@@ -1,4 +1,4 @@
-#!/usr/bin/env -S deno run --allow-write=/usr/bin/,/tmp --allow-env --allow-read
+#!/usr/bin/env -S deno run --allow-write=~/bin/,/tmp --allow-env --allow-read
 
 import { red } from "https://deno.land/x/nanocolors/mod.ts";
 import { tgz } from "https://deno.land/x/compress/mod.ts";
@@ -231,7 +231,7 @@ await yargs(Deno.args)
     (argv: Arguments) => {
       verbose = argv.verbose;
       if (!argv.directory) {
-        argv.directory = "/usr/bin";
+        argv.directory = Deno.env.get("HOME") + "/bin";
       }
       install(
         argv.package,
