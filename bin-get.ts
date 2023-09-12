@@ -1,18 +1,16 @@
 #!/usr/bin/env -S deno run --allow-write=/usr/bin/,/tmp --allow-env --allow-read
 
-import { red } from "https://deno.land/x/nanocolors@0.1.12/mod.ts";
-import { tgz } from "https://deno.land/x/compress@v0.4.4/mod.ts";
-import {
-  copy,
-  readerFromStreamReader,
-} from "https://deno.land/std@0.174.0/streams/conversion.ts";
-import { exists } from "https://deno.land/std@0.174.0/fs/mod.ts";
+import { red } from "https://deno.land/x/nanocolors/mod.ts";
+import { tgz } from "https://deno.land/x/compress/mod.ts";
+import { copy } from "https://deno.land/std/streams/copy.ts";
+import { readerFromStreamReader } from "https://deno.land/std/streams/reader_from_stream_reader.ts";
+import { exists } from "https://deno.land/std/fs/mod.ts";
 
-import yargs from "https://deno.land/x/yargs@v17.5.1-deno/deno.ts";
-import { Arguments } from "https://deno.land/x/yargs@v17.5.1-deno/deno-types.ts";
-import { YargsInstance } from "https://deno.land/x/yargs@v17.5.1-deno/build/lib/yargs-factory.js";
+import yargs from "https://deno.land/x/yargs/deno.ts";
+import { Arguments } from "https://deno.land/x/yargs/deno-types.ts";
+import { YargsInstance } from "https://deno.land/x/yargs/build/lib/yargs-factory.js";
 
-import { emptyDir, walkSync } from "https://deno.land/std@0.174.0/fs/mod.ts";
+import { emptyDir, walkSync } from "https://deno.land/std/fs/mod.ts";
 
 type ApiResult = {
   message: string | undefined;
