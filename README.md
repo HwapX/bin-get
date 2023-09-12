@@ -1,6 +1,6 @@
 # bin-get
 
-![Tests](https://github.com/OhMyMndy/bin-get/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/HwapX/bin-get/actions/workflows/tests.yml/badge.svg)
 
 Get binaries from Github Releases in a convenient way!
 
@@ -17,20 +17,20 @@ Why [Deno](https://deno.land)?
 Install package in `/usr/bin` without explicitly installing `bin-get.ts`
 
 ```bash
-sudo $(which deno) run --allow-all https://raw.githubusercontent.com/OhMyMndy/bin-get/main/bin-get.ts install helm/helm
+sudo $(which deno) run --allow-all https://raw.githubusercontent.com/HwapX/bin-get/main/bin-get.ts install helm/helm
 ```
 
 Install package in a user accessible location:
 
 ```bash
-deno run --allow-all https://raw.githubusercontent.com/OhMyMndy/bin-get/main/bin-get.ts install helm/helm --directory ~/.bin
+deno run --allow-all https://raw.githubusercontent.com/HwapX/bin-get/main/bin-get.ts install helm/helm --directory ~/.bin
 
 ```
 
 Or install `bin-get`
 
 ```bash
-deno install --allow-all https://raw.githubusercontent.com/OhMyMndy/bin-get/main/bin-get.ts
+deno install --allow-all https://raw.githubusercontent.com/HwapX/bin-get/main/bin-get.ts
 ```
 
 ## Contributing
