@@ -2,7 +2,7 @@ import { exists } from "https://deno.land/std/fs/exists.ts";
 import { assert } from "https://deno.land/std/testing/asserts.ts";
 
 const defaultAllows = new Map<string, string | null>([
-  ["--allow-write", "/usr/bin/,/tmp"],
+  ["--allow-write", Deno.env.get("HOME") + "/bin/,/tmp"],
   ["--allow-env", null],
   ["--allow-read", null],
   ["--allow-net", "api.github.com"],
@@ -40,9 +40,8 @@ const testPackages: string[] = [
 
 for (const testPackage of testPackages) {
   Deno.test(`Test install ${testPackage}`, async () => {
-    const p = Deno.run({
-      cmd: [
-        "deno",
+    const p = new Deno.Command("deno", {
+      args: [
         "run",
         "--allow-all",
         "./bin-get.ts",
@@ -51,19 +50,17 @@ for (const testPackage of testPackages) {
         "--force",
       ],
     });
-    await p.status();
-    Deno.close(p.rid);
+    await p.outputSync();
+    assert(
+      await exists(Deno.env.get("HOME") + `/bin/` + testPackage.split("/")[1]),
+      `${testPackage} should be installed in ~/bin/`,
+    );
   });
-  assert(
-    await exists(`/usr/bin/` + testPackage.split("/")[1]),
-    `${testPackage} should be installed in /usr/bin/`,
-  );
 }
 
 Deno.test(`Test install helm with predefined allow list`, async () => {
-  const p = Deno.run({
-    cmd: [
-      "deno",
+  const p = new Deno.Command("deno", {
+    args: [
       "run",
       ...getAllowList(
         new Map<string, string>([["--allow-net", ",get.helm.sh"]]),
@@ -74,14 +71,12 @@ Deno.test(`Test install helm with predefined allow list`, async () => {
       "--force",
     ],
   });
-  await p.status();
-  Deno.close(p.rid);
+  await p.outputSync();
 });
 
 Deno.test("Test install helm with custom location", async () => {
-  const p = Deno.run({
-    cmd: [
-      "deno",
+  const p = new Deno.Command("deno", {
+    args: [
       "run",
       "--allow-all",
       "./bin-get.ts",
@@ -92,8 +87,7 @@ Deno.test("Test install helm with custom location", async () => {
       "/root/.bin/",
     ],
   });
-  await p.status();
-  Deno.close(p.rid);
+  await p.outputSync();
   assert(
     await exists("/root/.bin/helm"),
     `helm should be installed in /root/.bin/helm`,
